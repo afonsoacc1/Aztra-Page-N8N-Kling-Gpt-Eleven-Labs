@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aztra Qingque • One‑Page Pro v2</title>
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    :root{ --bg:#0b1226;--panel:#121a36;--panel2:#0e162e;--tx:#e8eeff;--mut:#9cb1ff;--bd:#22305a;--acc:#9b5cff;--acc2:#46c1ff;--ok:#22c55e;--warn:#f59e0b;--err:#ef4444; --r:16px; --shadow:0 10px 40px #0006; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    [data-theme="qingque"]{--bg:#f7f8fa;--panel:#e7ebf3;--panel2:#dfe5f2;--tx:#1f2433;--mut:#51608f;--bd:#cdd5eb;--acc:#3e7bfa;--acc2:#f7b500;--ok:#0f9d58;--warn:#d77b00;--err:#cc3333}
+    [data-theme="dark"],@media(prefers-color-scheme:dark){--bg:#181818;--panel:#232323;--panel2:#1e1e1e;--tx:#eee;--mut:#c7c7c7;--bd:#2f2f2f;--acc:#ff6f61;--acc2:#7dd3fc}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(120deg,var(--bg),var(--panel2));color:var(--tx);font:500 15px/1.5 Inter,system-ui,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1200px;margin:32px auto;padding:0 16px}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+    .logo{font-weight:900;letter-spacing:.5px}
+    .pill{display:inline-block;margin-left:6px;padding:2px 10px;border-radius:999px;background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;font-size:12px}
+    .btn{border:none;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 0 24px #0004}
+    .btn.ghost{background:transparent;border:1px solid var(--bd);color:var(--tx)}
+    .btn.flat{background:transparent;color:var(--tx);text-decoration:underline;border:none;padding:6px}
+    nav{display:flex;gap:0;background:rgba(0,0,0,.08);border-radius:12px;overflow:hidden}
+    nav button{flex:1;padding:14px 10px;background:transparent;color:var(--tx);font-weight:800;border:none;cursor:pointer}
+    nav button.active{background:var(--acc);color:#fff}
+    .grid{display:grid;gap:16px}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:920px){.cols-2{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+    h2{margin:0 0 10px} h3{margin:0 0 8px}
+    label{display:block;margin:8px 0 4px}
+    input,select,textarea{width:100%;border:1px solid var(--bd);background:var(--panel2);color:var(--tx);border-radius:10px;padding:10px}
+    input[type="password"]{letter-spacing:.2em}
+    textarea{min-height:120px;resize:vertical}
+    pre,code{font-family:var(--mono)}
+    pre{background:#0006;border:1px solid var(--bd);padding:12px;border-radius:12px;overflow:auto}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .chip{display:inline-block;padding:3px 10px;border-radius:999px;background:#0003;border:1px solid var(--bd);font-size:12px}
+    .note{font-size:13px;color:var(--mut)} .kbd{font-family:var(--mono);font-size:12px;background:#0004;padding:2px 6px;border-radius:6px;border:1px solid var(--bd)}
+    .success{color:var(--ok)}.warn{color:var(--warn)}.error{color:var(--err)}
+    .modal{position:fixed;inset:0;display:none;z-index:1000}
+    .overlay{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .box{position:relative;z-index:2;max-width:900px;margin:40px auto;background:var(--panel);border:1px solid var(--bd);border-radius:16px;padding:16px}
+    .themeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .theme{padding:16px;border-radius:12px;cursor:pointer;color:#fff;font-weight:800;text-align:center}
+    .theme[data-t="tech"]{background:linear-gradient(90deg,#0b1226,#9b5cff)}
+    .theme[data-t="qingque"]{background:linear-gradient(90deg,#f7f8fa,#3e7bfa);color:#222}
+    .theme[data-t="dark"]{background:linear-gradient(90deg,#181818,#ff6f61)}
+    .spinner{width:18px;height:18px;border:2px solid #fff4;border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+  </style>
+</head>
+<body data-theme="tech">
+  <div class="wrap">
+    <header>
+      <div class="logo">Aztra Qingque <span class="pill">One‑Page Pro v2</span></div>
+      <div class="row" style="margin-left:auto;gap:8px">
+        <button class="btn ghost" id="btnTheme">🌈 Tema</button>
+        <button class="btn ghost" id="btnHelp">📘 Ajuda</button>
+        <button class="btn" id="btnExport">⬇️ Exportar Presets</button>
+      </div>
+    </header>
+
+    <nav id="tabs" aria-label="Navegação principal"></nav>
+
+    <main id="sections">
+      <section id="sec-dashboard" class="card" aria-labelledby="ttl-dashboard">
+        <h2 id="ttl-dashboard">Dashboard</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Resumo</h3>
+            <p class="note">Página única com <b>presets</b>, <b>Kling API</b>, integração <b>n8n</b>, e guias. Agora com <b>Webhook</b> embutido, <b>importar presets</b> e <b>copiar</b> JSON/cURL.</p>
+            <ul>
+              <li>Presets por nicho/tempo e export/import.</li>
+              <li>Preview do payload e cURLs.</li>
+              <li>Enviar direto para seu Webhook n8n.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Config Rápida</h3>
+            <div class="row">
+              <label style="flex:2">Webhook n8n URL
+                <input id="cfgWebhook" placeholder="https://seu-n8n/webhook/..." />
+              </label>
+              <label style="flex:1">Bearer Token
+                <input id="cfgToken" type="password" placeholder="opcional (backend recomenda)" />
+              </label>
+            </div>
+            <div class="row">
+              <button class="btn" id="btnSaveCfg">Salvar</button>
+              <button class="btn ghost" id="btnClearCfg">Limpar</button>
+              <span class="note">Config persiste em localStorage.</span>
+            </div>
+            <hr style="border:0;border-top:1px solid var(--bd);margin:12px 0"/>
+            <div class="row">
+              <input type="file" id="inpImport" accept="application/json" hidden/>
+              <button class="btn ghost" id="btnImport">📥 Importar Presets</button>
+              <span class="note">Carrega um JSON de presets e popula a lista.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-presets" class="card" aria-labelledby="ttl-presets" hidden>
+        <h2 id="ttl-presets">Presets (Nicho × Tempo) • 20 cada</h2>
+        <div class="row">
+          <label>Nicho <select id="fNicho"></select></label>
+          <label>Tempo <select id="fTempo"></select></label>
+          <button class="btn" id="btnGen20">Gerar 20</button>
+          <button class="btn ghost" id="btnGenAll">Gerar Todos (N×T×20)</button>
+        </div>
+        <div id="presetList" class="grid cols-2" style="margin-top:12px"></div>
+      </section>
+
+      <section id="sec-kling" class="card" aria-labelledby="ttl-kling" hidden>
+        <h2 id="ttl-kling">Kling API • Payload & cURL</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Configuração</h3>
+            <label>Modelo <select id="gModel"><option value="kling-v1">kling-v1</option></select></label>
+            <label>Modo <select id="gMode"><option value="std">std</option><option value="pro">pro</option></select></label>
+            <label>Duração (s) <input id="gDur" type="number" min="1" value="10" /></label>
+            <label>Aspect Ratio <select id="gAr"><option>9:16</option><option>16:9</option></select></label>
+            <div class="row">
+              <label style="flex:1">CFG <input id="gCfg" type="number" step="0.05" value="0.55"></label>
+              <label style="flex:1">Seed <input id="gSeed" type="number" value="-1"></label>
+            </div>
+            <label>Prompt<textarea id="gPrompt">cotidiano cinematográfico, câmera mão com estabilização, flares sutis, grão de filme moderno; camera 25mm; palette-2</textarea></label>
+            <label>Negative<textarea id="gNeg">low quality, watermark</textarea></label>
+            <div class="row">
+              <button class="btn" id="btnCurlSubmit">cURL Submit</button>
+              <button class="btn ghost" id="btnCurlPoll">cURL Poll</button>
+              <button class="btn ghost" id="btnCopyJson">Copiar JSON</button>
+              <button class="btn ghost" id="btnCopyCurl">Copiar cURL</button>
+            </div>
+            <div class="row">
+              <button class="btn" id="btnSendWebhook">➡️ Enviar para Webhook n8n</button>
+              <span id="sendStatus" class="note"></span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Preview do JSON enviado</h3>
+            <pre id="previewJson">{}</pre>
+            <h3 style="margin-top:12px">cURL</h3>
+            <pre id="previewCurl">—</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-n8n" class="card" aria-labelledby="ttl-n8n" hidden>
+        <h2 id="ttl-n8n">n8n • Blueprint rápido</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Fluxo recomendado</h3>
+            <ol>
+              <li>Webhook (recebe JSON dos presets).</li>
+              <li>Kling Token (node custom) → <span class="kbd">token</span>.</li>
+              <li>HTTP POST /videos/text2video → <span class="kbd">taskId</span>.</li>
+              <li>Wait (30s) ⇄ GET /tasks/{taskId} até <span class="kbd">status: succeed</span>.</li>
+              <li>GET {{video.url}} → binário <span class="kbd">video</span>.</li>
+              <li>OpenAI TTS → binário <span class="kbd">voice</span>.</li>
+              <li>MediaFX FFmpeg (mux) → binário <span class="kbd">final</span>.</li>
+              <li>Respond (file: <span class="kbd">final</span>) ou upload S3.</li>
+            </ol>
+            <p class="note">Nodes: <b>n8n-nodes-klingai</b> e <b>n8n-nodes-mediafx</b>.</p>
+          </div>
+          <div class="card">
+            <h3>Webhook schema (SPA → n8n)</h3>
+            <pre>{
+  "model_name": "kling-v1",
+  "mode": "std",
+  "prompt": "…",
+  "negative_prompt": "low quality, watermark",
+  "duration": "10",
+  "aspect_ratio": "9:16",
+  "cfg_scale": 0.55,
+  "seed": -1,
+  "tts_text": "Narração opcional",
+  "voice": "alloy"
+}</pre>
+            <h3>Headers base</h3>
+            <pre>Authorization: Bearer &lt;TOKEN&gt;
+Content-Type: application/json</pre>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Snippets (expressões n8n)</h3>
+          <pre>// Set → taskId
+{{$json.data.task_id || $json.task_id}}
+// Poll status
+{{$json.data.status || $json.status}}
+// Vídeo URL/ID
+{{$json.data.task_result.videos[0].url || $json.task_result.videos[0].url}}
+{{$json.data.task_result.videos[0].video_id || $json.task_result.videos[0].video_id}}</pre>
+        </div>
+      </section>
+
+      <section id="sec-tutos" class="card" aria-labelledby="ttl-tutos" hidden>
+        <h2 id="ttl-tutos">Tutoriais rápidos</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Instalar nodes custom</h3>
+            <pre>$ npm i n8n-nodes-klingai n8n-nodes-mediafx
+# Reinicie o n8n e ative os nós em Settings → Nodes</pre>
+            <h3>FFmpeg (MediaFX)</h3>
+            <pre>Map: -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -shortest</pre>
+          </div>
+          <div class="card">
+            <h3>Boas práticas de prompt (Kling)</h3>
+            <ul>
+              <li>Especifique câmera (ex.: <i>handheld stabilized, 25mm</i>).</li>
+              <li>Iluminação & paleta (ex.: <i>soft key light, palette‑2</i>).</li>
+              <li>Limpe o <b>negative_prompt</b> (watermark, low quality…).</li>
+              <li><span class="kbd">std</span> para custo; <span class="kbd">pro</span> para consistência.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Tema -->
+  <div id="mdlTheme" class="modal" role="dialog" aria-modal="true" aria-labelledby="ttlTheme">
+    <div class="overlay"></div>
+    <div class="box">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 id="ttlTheme" style="margin:0">Escolha um tema</h3>
+        <button class="btn ghost" id="closeTheme">Fechar</button>
+      </div>
+      <div class="themeGrid" style="margin-top:12px">
+        <div class="theme" data-t="tech">Tech</div>
+        <div class="theme" data-t="qingque">Qingque</div>
+        <div class="theme" data-t="dark">Dark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajuda/Resposta -->
+  <div id="mdlHelp" class="modal" role="dialog" aria-modal="true" aria-labelledby="ttlHelp">
+    <div class="overlay"></div>
+    <div class="box">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 id="ttlHelp" style="margin:0">Como usar</h3>
+        <button class="btn ghost" id="closeHelp">Fechar</button>
+      </div>
+      <div id="helpBody" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+<script>
+(()=>{
+  const $=(s,sc=document)=>sc.querySelector(s); const $$=(s,sc=document)=>[...sc.querySelectorAll(s)];
+  const App = window.AztraOne = { state:{active:'dashboard', presets:[], user: localStorage.getItem('az_user')||'guest'} };
+
+  // Tabs
+  const pages=[{id:'dashboard',label:'Dashboard'},{id:'presets',label:'Presets'},{id:'kling',label:'Kling API'},{id:'n8n',label:'n8n'},{id:'tutos',label:'Tutoriais'},];
+  const tabs=$('#tabs');
+  function renderTabs(){ tabs.innerHTML=pages.map(p=>`<button class="${App.state.active===p.id?'active':''}" data-id="${p.id}">${p.label}</button>`).join(''); $$('#tabs button').forEach(b=>b.onclick=()=>go(b.dataset.id)); }
+  function go(id){ App.state.active=id; renderTabs(); pages.forEach(p=>{ const s=$(`#sec-${p.id}`); if(s) s.hidden=(p.id!==id);}); location.hash=id; }
+  window.addEventListener('hashchange',()=>{const id=location.hash.replace('#','')||'dashboard'; go(id);},{passive:true});
+
+  // Tema (auto + persist)
+  const Theme={ get:()=>localStorage.getItem('az_theme')||'tech', set:(t)=>{document.body.setAttribute('data-theme',t);localStorage.setItem('az_theme',t);$('#uTheme')&&($('#uTheme').textContent=t);} };
+  Theme.set(Theme.get());
+  $('#btnTheme').onclick=()=>openModal('#mdlTheme'); $('#closeTheme').onclick=()=>closeModal('#mdlTheme');
+  $$('#mdlTheme .theme').forEach(el=>el.onclick=()=>{Theme.set(el.dataset.t); closeModal('#mdlTheme');});
+
+  // Ajuda
+  const helpHTML = `
+  <div class="grid cols-2">
+    <div class="card"><h3>1) Gere presets</h3><p>Na aba <b>Presets</b> selecione Nicho/Tempo e clique <b>Gerar 20</b>. Clique em "Usar" para preencher o painel Kling.</p></div>
+    <div class="card"><h3>2) Configure Webhook</h3><p>Em <b>Dashboard → Config Rápida</b>, informe a URL do seu Webhook n8n e (opcional) o Bearer Token.</p></div>
+    <div class="card"><h3>3) Envie</h3><p>Na aba <b>Kling API</b>, clique em <b>Enviar para Webhook</b>. A resposta aparece no modal com JSON.</p></div>
+    <div class="card"><h3>Notas</h3><ul><li>Tokens no client são apenas para teste. Em produção, use backend.</li><li>Use <span class='kbd'>std</span> p/ velocidade, <span class='kbd'>pro</span> p/ consistência.</li></ul></div>
+  </div>`;
+  $('#btnHelp').onclick=()=>{ $('#helpBody').innerHTML=helpHTML; openModal('#mdlHelp'); }; $('#closeHelp').onclick=()=>closeModal('#mdlHelp');
+
+  // Modais genéricos
+  function openModal(sel){ const m=$(sel); m.style.display='block'; trapFocus(m); }
+  function closeModal(sel){ const m=$(sel); m.style.display='none'; untrap?.(); }
+  let untrap=null; function trapFocus(modal){ const f=modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'); const first=f[0], last=f[f.length-1]; function loop(e){ if(e.key!=='Tab') return; if(e.shiftKey && document.activeElement===first){e.preventDefault(); last.focus();} else if(!e.shiftKey && document.activeElement===last){e.preventDefault(); first.focus();} } modal.addEventListener('keydown',loop); untrap=()=>modal.removeEventListener('keydown',loop); first?.focus(); }
+  $$('.modal .overlay').forEach(o=>o.onclick=()=>closeModal('#'+o.parentElement.id));
+
+  // Dashboard – cfg
+  $('#uName')&&($('#uName').textContent=App.state.user); $('#uPresets')&&($('#uPresets').textContent='0');
+  const Cfg={ get(){return { webhook: localStorage.getItem('az_webhook')||'', token: localStorage.getItem('az_token')||'' };}, set(w,t){ if(w!==undefined) localStorage.setItem('az_webhook',w); if(t!==undefined) localStorage.setItem('az_token',t);} };
+  const cfg=Cfg.get(); $('#cfgWebhook').value=cfg.webhook; $('#cfgToken').value=cfg.token;
+  $('#btnSaveCfg').onclick=()=>{ Cfg.set($('#cfgWebhook').value.trim(), $('#cfgToken').value.trim()); toast('Config salva'); };
+  $('#btnClearCfg').onclick=()=>{ Cfg.set('', ''); $('#cfgWebhook').value=''; $('#cfgToken').value=''; toast('Config limpa'); };
+
+  // Import presets
+  $('#btnImport').onclick=()=>$('#inpImport').click();
+  $('#inpImport').addEventListener('change', (ev)=>{ const f=ev.target.files?.[0]; if(!f) return; const fr=new FileReader(); fr.onload=()=>{ try{ const data=JSON.parse(fr.result); if(Array.isArray(data)){ App.presets=data; renderPresetList(App.presets); $('#uPresets').textContent=String(App.presets.length); go('presets'); toast('Presets importados'); } else { toast('JSON inválido'); } }catch{ toast('Erro ao ler JSON'); } }; fr.readAsText(f); });
+
+  // Presets
+  const NICHOS=['Maternidade','Aventureiro','Triste','Fome','Cozinheiro','Motorista','Massagista'];
+  const DURACOES=[5,10,15,30,60,300,600,900];
+  const selN=$('#fNicho'); selN.innerHTML=NICHOS.map(n=>`<option>${n}</option>`).join('');
+  const selT=$('#fTempo'); selT.innerHTML=DURACOES.map(d=>`<option value="${d}">${d<=90?d+'s':(d/60)+'m'}</option>`).join('');
+  function uid(){return 'p_'+Math.random().toString(36).slice(2,9)}
+  function genPreset(nicho,d,idx){ return { id:uid(), title:`${nicho} ${d}s #${String(idx+1).padStart(2,'0')}`, d, ar:d>=60?'16:9':'9:16', mode:d<=30?'std':'pro', cfg:d<=10?0.55:d<=30?0.60:d<=60?0.65:0.70, tags:[nicho.toLowerCase(), d<=10?'s':d<=30?'m':'h'], prompt:`${nicho.toLowerCase()} cena ${idx+1}, duração ${d}s, câmera, luz, emoção.`, negative:'low quality, watermark' }; }
+  function render20(){ const nicho=selN.value; const tempo=Number(selT.value); App.presets=Array.from({length:20},(_,i)=>genPreset(nicho,tempo,i)); $('#uPresets').textContent=String(App.presets.length); renderPresetList(App.presets); }
+  function renderPresetList(arr){ const grid=$('#presetList'); grid.innerHTML=arr.map(p=>`<div class='card'> <div class='row' style='justify-content:space-between'><b>${p.title}</b><span class='chip'>${p.tags.join(', ')}</span></div> <div class='note'>${p.prompt}</div> <div class='row' style='margin-top:8px'> <button class='btn' data-apply='${b64(JSON.stringify(p))}'>Usar</button> <button class='btn ghost' data-copy='${b64(p.prompt)}'>Copiar Prompt</button> </div> </div>`).join(''); }
+  function b64(s){return btoa(unescape(encodeURIComponent(s)))} function fromb64(s){return decodeURIComponent(escape(atob(s)))}
+  $('#btnGen20').onclick=render20; render20();
+  $('#presetList').addEventListener('click',ev=>{ const a=ev.target.closest('button[data-apply]'); if(a){ const p=JSON.parse(fromb64(a.dataset.apply)); applyPresetToKling(p); go('kling'); } const c=ev.target.closest('button[data-copy]'); if(c){ navigator.clipboard.writeText(fromb64(c.dataset.copy)); toast('Prompt copiado'); } });
+  $('#btnGenAll').onclick=()=>{ const pack=[]; for(const n of NICHOS){ for(const d of DURACOES){ for(let i=0;i<20;i++) pack.push(genPreset(n,d,i)); } } download('presets_full_'+Date.now()+'.json', JSON.stringify(pack,null,2)); toast('Arquivo exportado'); };
+  $('#btnExport').onclick=()=>{ if(!App.presets.length){toast('Gere presets primeiro');return} download('presets_'+Date.now()+'.json', JSON.stringify(App.presets,null,2)); };
+  function download(name, content){ const blob=new Blob([content],{type:'application/json'}); const a=document.createElement('a'); const url=URL.createObjectURL(blob); a.href=url; a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(url),0); }
+  function toast(msg){ const t=document.createElement('div'); t.textContent=msg; t.style.cssText='position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:8px 12px;border:1px solid var(--bd);border-radius:10px;z-index:9999'; document.body.appendChild(t); setTimeout(()=>t.remove(),1400); }
+
+  // Kling panel
+  const K={ getPayload(){ return { model_name:$('#gModel').value, mode:$('#gMode').value, prompt:$('#gPrompt').value.trim(), negative_prompt:$('#gNeg').value.trim(), duration:String($('#gDur').value||'10'), aspect_ratio:$('#gAr').value, cfg_scale:Number($('#gCfg').value||0.55), seed:Number($('#gSeed').value||-1) }; }, update(){ const p=this.getPayload(); $('#previewJson').textContent=JSON.stringify(p,null,2); }, curlSubmit(){ const p=this.getPayload(); return `curl --location 'https://api.klingai.com/v1/videos/text2video' \\\n  --header 'Authorization: Bearer <TOKEN>' \\\n  --header 'Content-Type: application/json' \\\n  --data '${JSON.stringify(p).replace(/'/g,"'\\''")}'`; }, curlPoll(){ return `curl --location 'https://api.klingai.com/v1/tasks/<TASK_ID>' \\\n  --header 'Authorization: Bearer <TOKEN>'`; } };
+  ['gModel','gMode','gDur','gAr','gCfg','gSeed','gPrompt','gNeg'].forEach(id=>$('#'+id).addEventListener('input',()=>K.update())); K.update();
+  $('#btnCurlSubmit').onclick=()=>{ $('#previewCurl').textContent=K.curlSubmit(); toast('cURL de submit pronto'); };
+  $('#btnCurlPoll').onclick=()=>{ $('#previewCurl').textContent=K.curlPoll(); toast('cURL de poll pronto'); };
+  $('#btnCopyJson').onclick=()=>{ navigator.clipboard.writeText($('#previewJson').textContent); toast('JSON copiado'); };
+  $('#btnCopyCurl').onclick=()=>{ navigator.clipboard.writeText($('#previewCurl').textContent); toast('cURL copiado'); };
+
+  function applyPresetToKling(p){ $('#gMode').value=p.mode; $('#gDur').value=p.d; $('#gAr').value=p.ar; $('#gCfg').value=p.cfg; $('#gPrompt').value=p.prompt; $('#gNeg').value=p.negative||'low quality, watermark'; K.update(); }
+
+  // Enviar para Webhook n8n
+  $('#btnSendWebhook').onclick=async()=>{
+    const {webhook,token}=Cfg.get(); const status=$('#sendStatus'); const payload=K.getPayload();
+    if(!webhook){ toast('Configure o Webhook na Dashboard'); go('dashboard'); return; }
+    status.innerHTML = '<span class="spinner" aria-hidden="true"></span> Enviando…';
+    try{
+      const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(), 60000);
+      const res=await fetch(webhook,{ method:'POST', headers:{ 'Content-Type':'application/json', ...(token?{Authorization:`Bearer ${token}`}:{}) }, body:JSON.stringify(payload), signal:ctrl.signal }); clearTimeout(t);
+      const ct=res.headers.get('content-type')||''; const body=ct.includes('application/json')? await res.json(): await res.text();
+      status.textContent = res.ok? 'OK' : `Erro ${res.status}`;
+      $('#helpBody').innerHTML = `<div class='card'><h3>Resposta do Webhook</h3><pre>${sanitize(JSON.stringify(body,null,2))}</pre></div>`; openModal('#mdlHelp');
+    }catch(err){ status.textContent='Falha'; $('#helpBody').innerHTML = `<div class='card'><h3>Erro na requisição</h3><pre>${sanitize(String(err))}</pre></div>`; openModal('#mdlHelp'); }
+  };
+
+  // utils
+  function sanitize(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+  // Boot
+  renderTabs(); go(location.hash.replace('#','')||'dashboard');
+})();
+</script>
+</body>
+</html>
